@@ -1,0 +1,26 @@
+﻿@model AddTopicVM
+<div id="addTopic" class="modal fade top-25" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">Add topic</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-action="Add" asp-controller="Topic">
+                    <div class="form-group">
+                        <label for="inputName">Theme</label>
+                        <input type="text" class="form-control" asp-for="Theme">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName">Description</label>
+                        <textarea type="text" class="form-control" id="exampleFormControlTextarea1" rows="3" asp-for="Description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-save="modal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

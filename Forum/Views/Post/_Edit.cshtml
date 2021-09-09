@@ -1,0 +1,15 @@
+﻿@model Post
+<form asp-action="Edit" asp-controller="Post" asp-for="Id" class="col-12 p-0" data-id=@Model.Id>
+	<input asp-for="Id" hidden />
+	<div class="input-group">
+		<textarea class="form-control" asp-for="Message"></textarea>
+		<div class="d-flex flex-column">
+			<button type="submit" class="btn btn-danger" data-back="back">Back</button>
+			<button type="submit" class="btn btn-success" data-save="edit">Edit</button>
+		</div>
+	</div>
+</form>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

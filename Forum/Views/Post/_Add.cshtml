@@ -1,0 +1,15 @@
+﻿@model Forum.Data.ViewModels.PostVM
+		@if (User.Identity.IsAuthenticated)
+{
+	<div class="row pt-4">
+		<div asp-validation-summary="ModelOnly"></div>
+		<form asp-action="Add" asp-controller="Post" class="col-12  p-0">
+			<div class="input-group">
+				<input type="text" asp-for="Id" hidden>
+				<textarea class="form-control" asp-for="Message" rows="2" placeholder="Message"></textarea>
+				<button type="submit" class="btn btn-primary">Send</button>
+			</div>
+			<span asp-validation-for="Message" class="text-danger"></span>
+		</form>
+	</div>
+}

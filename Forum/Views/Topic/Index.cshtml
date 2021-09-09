@@ -1,0 +1,20 @@
+﻿@model Forum.Data.ViewModels.TopicVM
+<div id="PlaceHolderHere"></div>
+<div class="container">
+	<partial name="../Post/_Add" model=@Model.PostVM/>
+	@if (Model.Topic.Posts.Count>0)
+	{
+		<div class="row ">
+			<ul class="list-group col-12 p-0">
+				@foreach (var item in Model.Topic.Posts)
+				{
+					<partial name="../Post/_Item" model="item" />
+				}
+			</ul>
+		</div>
+	}
+	else
+	{
+		<h3>No messages found.</h3>
+	}
+</div>

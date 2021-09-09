@@ -1,0 +1,15 @@
+﻿@model Topic
+<li class="list-group-item container p-0">
+	<a href="\Topic\Index\@Model.Id">
+		<div class="row">
+			<div class="d-flex flex-column justify-content-center col-2">
+				<bold class="align-middle text-center">@Model.CreatorUserName</bold>
+				<small class="align-middle text-center">@Model.CreatedDate.ToString("dd/MM/yyyy")</small>
+			</div>
+			<div class="col-9">
+				<h5 class="text-center">@Model.Theme</h5>
+				<p class="text-center font-italic">@Model.Description</p>
+			</div>
+		</div>
+	</a>
+</li>
