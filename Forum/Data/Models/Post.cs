@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,5 +23,14 @@ namespace Forum.Models
         public Nullable<DateTime> EditDate { get; set; }
         public string CreatorUserName { get; set; }
         public Topic Topic { get; set; }
+    }
+    public class PostValidator : AbstractValidator<Post>
+    {
+        public PostValidator()
+        {
+            RuleFor(x => x.Id).NotNull();
+            RuleFor(x => x.Message).Length(5, 1000).WithMessage("Length message between 5 and 1000 symbols");
+            RuleFor(x => x.CreatorUserName).NotEmpty();
+        }
     }
 }

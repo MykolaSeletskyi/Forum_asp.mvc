@@ -12,15 +12,25 @@ $(function () {
 			PlaceHolderElement.find('.modal').modal('show');
 		})
 	})
-
 	PlaceHolderElement.on('click', '[data-save="modal"]', function (event) {
 		event.preventDefault();
 		var form = $(this).parents('.modal').find('form');
 		var actionUrl = form.attr('action');
 		var sendData = form.serialize();
 		$.post(actionUrl, sendData).done(function (data) {
-			PlaceHolderElement.find('.modal').modal('hide');
-			setTimeout(() => location.reload(), 100);
+			if (data == "") {
+
+				PlaceHolderElement.find('.modal').modal('hide');
+				setTimeout(() => location.reload(), 100);
+			} else
+			{
+				PlaceHolderElement.find('.modal').modal('hide');
+				setTimeout(() =>
+				{
+					PlaceHolderElement.html(data);
+					PlaceHolderElement.find('.modal').modal('show');
+				}, 170);
+			}
 		})
 	})
 })
@@ -43,14 +53,13 @@ function EditPost()
 			var actionUrl = form.attr('action');
 			var sendData = form.serialize();
 			$.post(actionUrl, sendData).done(function (data) {
-				element.replaceWith(data);
+				data.includes('form') ? element.html(data) : element.replaceWith(data);
 				EditPost();
 			})
 		})
 		element.on('click', '[data-back="back"]', function (event) {
 			event.preventDefault();
 			var form = element.find('form');
-			console.log('/Post/GetById/' + form.attr("data-id"));
 			$.get('/Post/GetById/' + form.attr("data-id")).done(function (data) {
 				element.replaceWith(data);
 				EditPost();

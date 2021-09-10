@@ -19,9 +19,4 @@ namespace Forum.Models
         public string CreatorUserName {  get; set;}
         public SortedSet<Post> Posts {  get; set; }
     }
-    public class AddTopicVM
-    {
-        public string Theme { get; set; }
-        public string Description { get; set; }
-    }
 }

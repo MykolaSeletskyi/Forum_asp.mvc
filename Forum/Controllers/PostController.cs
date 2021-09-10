@@ -29,7 +29,7 @@ namespace Forum.Controllers
             if (!ModelState.IsValid)
             {
                 Topic topic = _db.Topics.Include(i=>i.Posts).Where(i => i.Id == postVM.Id).FirstOrDefault();
-                TopicVM topicVM = new TopicVM(topic, postVM);
+                TopicsVM topicVM = new TopicsVM(topic, postVM);
                 return View($"./../Topic/Index", topicVM);
             }
             Topic _topic = _db.Topics.Where(i => i.Id == postVM.Id).FirstOrDefault();
@@ -50,21 +50,25 @@ namespace Forum.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_Edit", _post);
+            return PartialView("_Edit", new PostVM(_post));
         }
         [HttpPost]
-        public IActionResult Edit(int Id, PostVM postVM)
+        public IActionResult Edit(PostVM post)
         {
-            Post _post = _db.Posts.Where(i => i.Id == Id).FirstOrDefault();
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_Edit", post);
+            }
+            Post _post = _db.Posts.Where(i => i.Id == post.Id).FirstOrDefault();
             if (_post == null)
             {
                 return NotFound();
             }
-            if(_post.CreatorUserName!=User.Identity.Name && User.Identity.Name != null)
+            if (_post.CreatorUserName!=User.Identity.Name)
             {
                 return BadRequest();
             }
-            _post.Message = postVM.Message;
+            _post.Message = post.Message;
             _post.EditDate = DateTime.Now;
             _db.SaveChanges();
             return PartialView("_Item", _post);

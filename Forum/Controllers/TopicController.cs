@@ -23,7 +23,7 @@ namespace Forum.Controllers
         [HttpGet]
         public IActionResult Topics()
         {
-            return View(_db.Topics.ToList());
+            return View(_db.Topics.OrderByDescending(i=>i.CreatedDate).ToList());
         }
         [HttpGet]
         public IActionResult Add()
@@ -36,6 +36,10 @@ namespace Forum.Controllers
             if (!User.Identity.IsAuthenticated)
             {
                 return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_Add", topic);
             }
             Topic _topic = new Topic()
             {
@@ -56,7 +60,7 @@ namespace Forum.Controllers
             {
                 return NotFound();
             }
-            TopicVM topicVM = new TopicVM(_topic); 
+            TopicsVM topicVM = new TopicsVM(_topic); 
             return View(topicVM);
         }
     }

@@ -1,5 +1,6 @@
-﻿@model Post
+﻿@model Forum.Data.ViewModels.PostVM
 <form asp-action="Edit" asp-controller="Post" asp-for="Id" class="col-12 p-0" data-id=@Model.Id>
+	<div asp-validation-summary="ModelOnly"></div>
 	<input asp-for="Id" hidden />
 	<div class="input-group">
 		<textarea class="form-control" asp-for="Message"></textarea>
@@ -8,8 +9,5 @@
 			<button type="submit" class="btn btn-success" data-save="edit">Edit</button>
 		</div>
 	</div>
+	<span asp-validation-for="Message" class="text-danger"></span>
 </form>
-
-@section Scripts {
-<partial name="_ValidationScriptsPartial" />
-}

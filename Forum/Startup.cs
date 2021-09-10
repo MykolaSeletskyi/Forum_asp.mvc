@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Forum.Data;
 using Forum.Data.ViewModels;
+using Forum.Models;
 using Forum.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -52,6 +53,8 @@ namespace Forum
                 //...mvc setup...
             }).AddFluentValidation();
             services.AddTransient<IValidator<PostVM>, PostVMValidator>();
+            services.AddTransient<IValidator<Post>, PostValidator>();
+            services.AddTransient<IValidator<AddTopicVM>, AddTopicVMValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

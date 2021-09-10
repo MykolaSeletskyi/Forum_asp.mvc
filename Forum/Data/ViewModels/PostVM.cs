@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Forum.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,15 @@ namespace Forum.Data.ViewModels
     {
         public int Id { get; set; }
         public string Message { get; set; }
+        public PostVM()
+        {
+
+        }
+        public PostVM(Post post)
+        {
+            Id = post.Id;
+            Message = post.Message;
+        }
     }
     public class PostVMValidator : AbstractValidator<PostVM>
     {
